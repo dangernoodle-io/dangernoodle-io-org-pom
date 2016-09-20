@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>io.dangernoodle</groupId>
+  <artifactId>dangernoodle-io-org-pom</artifactId>
+  <version>1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>${project.artifactId}</name>
+  <url>https://github.com/dangernoodle-io/dangernoodle-io-org-pom</url>
+  <description>parent pom for dangernoodle.io organization</description>
+
+  <properties>
+    <!--
+      plugin versions - only plugins that here must be available to all downstream projects should be defined here
+    -->
+    <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
+    <maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
+    <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
+    <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+    <unleash-maven-plugin.version>2.1.2</unleash-maven-plugin.version>
+    <unleash-maven-plugin-git-scm.version>2.0.0</unleash-maven-plugin-git-scm.version>
+  </properties>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>com.itemis.maven.plugins</groupId>
+          <artifactId>unleash-maven-plugin</artifactId>
+          <version>${unleash-maven-plugin.version}</version>
+          <dependencies>
+            <dependency>
+              <groupId>com.itemis.maven.plugins</groupId>
+              <artifactId>unleash-scm-provider-git</artifactId>
+              <version>${unleash-maven-plugin-git-scm.version}</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>${maven-install-plugin.version}</version>
+          <configuration>
+            <installAtEnd>true</installAtEnd>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${maven-deploy-plugin.version}</version>
+          <configuration>
+            <deployAtEnd>true</deployAtEnd>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${maven-release-plugin.version}</version>
+          <configuration>
+            <useReleaseProfile>false</useReleaseProfile>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <scm>
+    <connection>scm:git:git@github.com/dangernoodle-io/dangernoodle-io-org-pom.git</connection>
+    <developerConnection>scm:git:git@github.com:dangernoodle-io/dangernoodle-io-org-pom.git</developerConnection>
+    <url>https://github.com/dangernoodle-io/dangernoodle-io-org-pom</url>
+    <tag>dangernoodle-io-org-pom-1</tag>
+  </scm>
+
+  <organization>
+    <name>dangernoodle.io</name>
+    <url>http://dangernoodle.io</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <id>jgangemi</id>
+      <name>Jae Gangemi</name>
+      <email>jae at dangernoodle dot io</email>
+    </developer>
+  </developers>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/dangernoodle-io/dangernoodle-io-org-pom/issues</url>
+  </issueManagement>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+    </repository>
+  </distributionManagement>
+
+  <profiles>
+    <profile>
+      <id>nexus-deploy</id>
+      <activation>
+        <property>
+          <name>env.IS_M2RELEASEBUILD</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>${maven-gpg-plugin.version}</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>
