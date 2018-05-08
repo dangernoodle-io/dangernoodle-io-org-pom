@@ -1,4 +1,6 @@
 .project
 .settings
 .README.md.html
-
+pom.xml.releaseBackup
+release.properties
+target/
