@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -20,6 +21,7 @@
     <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
     <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
     <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+    <nexus-staging-plugin.version>1.6.8</nexus-staging-plugin.version>
   </properties>
 
   <build>
@@ -41,6 +43,19 @@
           <version>${maven-release-plugin.version}</version>
           <configuration>
             <useReleaseProfile>false</useReleaseProfile>
+            <releaseProfiles>release</releaseProfiles>
+            <goals>deploy nexus-staging:release</goals>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.sonatype.plugins</groupId>
+          <artifactId>nexus-staging-maven-plugin</artifactId>
+          <version>${nexus-staging-plugin.version}</version>
+          <extensions>true</extensions>
+          <configuration>
+            <serverId>ossrh</serverId>
+            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+            <autoReleaseAfterClose>true</autoReleaseAfterClose>
           </configuration>
         </plugin>
       </plugins>
@@ -51,7 +66,6 @@
     <connection>scm:git:git@github.com/dangernoodle-io/dangernoodle-io-org-pom.git</connection>
     <developerConnection>scm:git:git@github.com:dangernoodle-io/dangernoodle-io-org-pom.git</developerConnection>
     <url>https://github.com/dangernoodle-io/dangernoodle-io-org-pom</url>
-    <tag>dangernoodle-io-org-pom-1</tag>
   </scm>
 
   <organization>
@@ -92,13 +106,7 @@
 
   <profiles>
     <profile>
-      <id>nexus-deploy</id>
-      <activation>
-        <property>
-          <name>env.IS_M2RELEASEBUILD</name>
-          <value>true</value>
-        </property>
-      </activation>
+      <id>release</id>
       <build>
         <plugins>
           <plugin>
