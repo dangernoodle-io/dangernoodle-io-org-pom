@@ -53,7 +53,7 @@
           <extensions>true</extensions>
           <configuration>
             <serverId>ossrh</serverId>
-            <stagingProfileId>iodangernoodle-1019</stagingProfileId>
+            <stagingRepositoryId>iodangernoodle-1019</stagingRepositoryId>
             <nexusUrl>https://oss.sonatype.org/</nexusUrl>
             <autoReleaseAfterClose>true</autoReleaseAfterClose>
           </configuration>
