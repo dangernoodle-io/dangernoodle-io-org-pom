@@ -14,7 +14,7 @@
 
   <properties>
     <!--
-      plugin versions - only plugins that here must be available to all downstream projects should be defined here
+      plugins defined here are required by all projects
     -->
     <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
     <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
