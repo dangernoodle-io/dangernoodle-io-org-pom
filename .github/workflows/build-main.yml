@@ -1,8 +1,11 @@
-# pull-request.yml
+# build-main.yml
 
-name: pull-request
-on: pull_request
+name: build-main
+on:
+  push:
+    branches:
+      - main
 jobs:
-  pull-request:
+  build-main:
     uses: dangernoodle-io/.github/.github/workflows/maven-build.yml@main
     secrets: inherit
