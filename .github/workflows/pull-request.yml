@@ -1,8 +1,0 @@
-# pull-request.yml
-
-name: pull-request
-on: pull_request
-jobs:
-  pull-request:
-    uses: dangernoodle-io/.github/.github/workflows/maven-build.yml@main
-    secrets: inherit
