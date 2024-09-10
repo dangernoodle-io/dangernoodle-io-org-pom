@@ -110,22 +110,27 @@
 
   <profiles>
     <profile>
-      <id>github</id>
+      <id>gpg-cicd</id>
       <activation>
         <property>
-          <name>MAVEN_GPG_PASSPHRASE</name>
+          <name>env.MAVEN_GPG_PASSPHRASE</name>
         </property>
       </activation>
       <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <configuration>
-              <signer>bc</signer>
-            </configuration>
-          </plugin>
-        </plugins>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-gpg-plugin</artifactId>
+              <configuration>
+                <gpgArguments>
+                  <arg>--pinentry-mode</arg>
+                  <arg>loopback</arg>
+                </gpgArguments>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
       </build>
     </profile>
     <profile>
