@@ -9,5 +9,5 @@ on:
 
 jobs:
   build-main:
-    uses: dangernoodle-io/.github/.github/workflows/maven-build.yml@main
     secrets: inherit
+    uses: dangernoodle-io/.github/.github/workflows/maven.yml@main
