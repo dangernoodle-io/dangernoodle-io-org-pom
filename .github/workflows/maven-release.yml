@@ -6,7 +6,7 @@ on:
 jobs:
   build-main:
     secrets: inherit
-    uses: dangernoodle-io/.github/.github/workflows/maven.yml@jae/gpg
+    uses: dangernoodle-io/.github/.github/workflows/maven.yml@main
     with:
       maven-goals: release:prepare release:perform
       release: true
