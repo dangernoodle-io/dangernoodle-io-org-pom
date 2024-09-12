@@ -56,6 +56,7 @@
           <version>${maven-release-plugin.version}</version>
           <configuration>
             <releaseProfiles>release</releaseProfiles>
+            <signTag>true</signTag>
             <tagNameFormat>@{project.version}</tagNameFormat>
             <useReleaseProfile>false</useReleaseProfile>
           </configuration>
@@ -109,30 +110,6 @@
   </issueManagement>
 
   <profiles>
-    <profile>
-      <id>gpg-cicd</id>
-      <activation>
-        <property>
-          <name>env.MAVEN_GPG_PASSPHRASE</name>
-        </property>
-      </activation>
-      <build>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-gpg-plugin</artifactId>
-              <configuration>
-                <gpgArguments>
-                  <arg>--pinentry-mode</arg>
-                  <arg>loopback</arg>
-                </gpgArguments>
-              </configuration>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-      </build>
-    </profile>
     <profile>
       <id>release</id>
       <build>
