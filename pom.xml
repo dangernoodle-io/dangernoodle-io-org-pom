@@ -70,7 +70,8 @@
             <deploymentName>${project.artifactId}-${project.version}</deploymentName>
             <publishingServerId>central</publishingServerId>
             <autoPublish>true</autoPublish>
-            <waitUntil>published</waitUntil>
+            <!-- the 'published' status takes a while to achieve -->
+            <waitUntil>validated</waitUntil>
           </configuration>
         </plugin>
       </plugins>
